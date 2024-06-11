@@ -49,7 +49,8 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item d-flex">
                             <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
-                            <a href="">paki</a>
+                            <a class="nav-link"
+                                href="{{ route('admin.photographys.index') }}">{{ __('Photographys') }}</a>
                         </li>
                     </ul>
 
