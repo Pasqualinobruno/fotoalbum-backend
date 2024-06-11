@@ -29,7 +29,10 @@
                             <td><img width="160" src="{{ $photo->image }}" alt=""></td>
                             <td>{{ $photo->upload_image }}</td>
                             <td>
-                                <a href="">Viev</a>/<a href="">Edit</a>/<a href="">Delet</a>
+                                <button class="btn btn-primary">
+                                    <a href="{{ route('admin.photographys.show', $photo) }}"
+                                        class="text-white a-un">View</a>
+                                </button>
                             </td>
                         </tr>
                     @empty

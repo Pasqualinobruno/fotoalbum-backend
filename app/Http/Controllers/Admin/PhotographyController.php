@@ -24,7 +24,7 @@ class PhotographyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.photo.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class PhotographyController extends Controller
      */
     public function show(Photography $photography)
     {
-        //
+        return view('admin.photo.show', compact('photography'));
     }
 
     /**
