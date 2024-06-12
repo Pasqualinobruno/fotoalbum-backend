@@ -6,7 +6,7 @@ use App\Models\Photography;
 use App\Http\Requests\StorePhotographyRequest;
 use App\Http\Requests\UpdatePhotographyRequest;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Storage;
 
 class PhotographyController extends Controller
 {
@@ -24,7 +24,19 @@ class PhotographyController extends Controller
      */
     public function create()
     {
-        return view('admin.photo.create');
+        $categories = [
+            'Landscape',
+            'Portrait',
+            'Wildlife',
+            'Street',
+            'Architectural',
+            'Fashion',
+            'Sports',
+            'Macro',
+            'Travel',
+            'Documentary'
+        ];
+        return view('admin.photo.create', compact('categories'));
     }
 
     /**
@@ -32,7 +44,19 @@ class PhotographyController extends Controller
      */
     public function store(StorePhotographyRequest $request)
     {
-        //
+        //dd($request->all());
+        //validazione
+        $validated = $request->validated();
+
+        //creazione
+        $validated['image'] = Storage::put('uploads', $request->image);
+
+        //dd($validated);
+
+        Photography::created($validated);
+
+        //pagina di ritorno dopo la creazione con messaggio
+        return to_route('admin.photo.index')->with('success', 'Photography created successfully.');
     }
 
     /**

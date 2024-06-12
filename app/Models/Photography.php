@@ -15,6 +15,7 @@ class Photography extends Model
         'description',
         'upload_image',
         'evidence',
-        'city'
+        'city',
+        'category'
     ];
 }

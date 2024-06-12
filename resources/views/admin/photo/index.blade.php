@@ -1,9 +1,15 @@
 @extends('layouts.admin')
 @section('content')
     <header class="py-3">
-        <div class="container">
+        <div class="jumbotron bg-dark text-white p-5 d-flex align-items-center justify-content-between">
             <h1>Photographys</h1>
+            <a class="btn btn-primary" href="{{ route('admin.photographys.create') }}">
+                <i class="fa-solid fa-plus"></i> Create
+            </a>
         </div>
+
+
+
     </header>
     <div class="container">
         <div class="table-responsive">
