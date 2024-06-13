@@ -27,7 +27,8 @@ class StorePhotographyRequest extends FormRequest
             'description' => 'nullable|string|max:500',
             'upload_image' => 'nullable|date',
             'evidence' => 'nullable|boolean',
-            'city' => 'nullable|string|max:100'
+            'city' => 'nullable|string|max:100',
+            'category' => 'nullable'
 
         ];
     }

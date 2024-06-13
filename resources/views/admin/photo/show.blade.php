@@ -3,7 +3,12 @@
     <div class="container p-3">
         <h2 class="text-center">{{ $photography->name }}</h2>
         <div class="container d-flex gap-4">
-            <img src="{{ $photography->image }}" alt="">
+            @if (Str::startsWith($photography->image, 'https://'))
+                <img height="500" width="400" loading='lazy' src="{{ $photography->image }}" alt="">
+            @else
+                <img height="500" width="400" loading='lazy' src="{{ asset('storage/' . $photography->image) }}"
+                    alt="">
+            @endif
             <ul class="list-unstyled">
                 <li><strong>Description:</strong> {{ $photography->description }}</li>
                 <hr>

@@ -12,6 +12,7 @@
 
     </header>
     <div class="container">
+        @include('partials.session-message')
         <div class="table-responsive">
             <table class="table table-striped table-hover table-borderless table-dark align-middle">
                 <thead class="table-light">
@@ -32,12 +33,24 @@
                         <tr class="table-primary">
                             <td scope="row">{{ $photo->id }}</td>
                             <td>{{ $photo->name }}</td>
-                            <td><img width="160" src="{{ $photo->image }}" alt=""></td>
+                            <td>
+                                @if (Str::startsWith($photo->image, 'https://'))
+                                    <img width="160" loading='lazy' src="{{ $photo->image }}" alt="">
+                                @else
+                                    <img width="160" height="130" loading='lazy'
+                                        src="{{ asset('storage/' . $photo->image) }}" alt="">
+                                @endif
+                            </td>
+
                             <td>{{ $photo->upload_image }}</td>
                             <td>
                                 <button class="btn btn-primary">
-                                    <a href="{{ route('admin.photographys.show', $photo) }}"
-                                        class="text-white a-un">View</a>
+                                    <a href="{{ route('admin.photographys.show', $photo) }}" class="text-white a-un"><i
+                                            class="fa-solid fa-eye"></i></a>
+                                </button>
+                                <button class="btn btn-dark">
+                                    <a href="{{ route('admin.photographys.edit', $photo) }}" class="text-white a-un"><i
+                                            class="fa-solid fa-pencil-alt"></i></a>
                                 </button>
                             </td>
                         </tr>

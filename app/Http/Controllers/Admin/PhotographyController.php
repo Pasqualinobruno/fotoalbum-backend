@@ -6,6 +6,7 @@ use App\Models\Photography;
 use App\Http\Requests\StorePhotographyRequest;
 use App\Http\Requests\UpdatePhotographyRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 
 class PhotographyController extends Controller
@@ -53,10 +54,10 @@ class PhotographyController extends Controller
 
         //dd($validated);
 
-        Photography::created($validated);
+        Photography::create($validated);
 
         //pagina di ritorno dopo la creazione con messaggio
-        return to_route('admin.photo.index')->with('success', 'Photography created successfully.');
+        return to_route('admin.photographys.index')->with('message', 'Photography created successfully.');
     }
 
     /**
@@ -72,7 +73,19 @@ class PhotographyController extends Controller
      */
     public function edit(Photography $photography)
     {
-        //
+        $categories = [
+            'Landscape',
+            'Portrait',
+            'Wildlife',
+            'Street',
+            'Architectural',
+            'Fashion',
+            'Sports',
+            'Macro',
+            'Travel',
+            'Documentary'
+        ];
+        return view('admin.photo.edit', compact('photography', 'categories'));
     }
 
     /**
@@ -80,8 +93,27 @@ class PhotographyController extends Controller
      */
     public function update(UpdatePhotographyRequest $request, Photography $photography)
     {
-        //
+        //dd($request->all());
+
+        //validazione
+        $validated = $request->validated();
+        //aggiornamento dell'immagine
+        if ($request->has('image')) {
+            if ($photography->image) {
+                Storage::delete($photography->image);
+            }
+            $image_path = Storage::put('upload', $request->image);
+            $validated['image'] = $image_path;
+        }
+        //dd($request->all());
+
+        //aggiorniamo
+        $photography->update($validated);
+
+        //rindiriziamo
+        return to_route('admin.photographys.index')->with('message', 'Photography created successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
