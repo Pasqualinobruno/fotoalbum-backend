@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
-    <header class="py-3">
-        <div class="jumbotron bg-dark text-white p-5 d-flex align-items-center justify-content-between">
+    <header class="mb-3">
+        <div class="jumbotron bg-dark text-white p-4 d-flex align-items-center justify-content-between">
             <h1>Photographys</h1>
             <a class="btn btn-primary" href="{{ route('admin.photographys.create') }}">
                 <i class="fa-solid fa-plus"></i> Create

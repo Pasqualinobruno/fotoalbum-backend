@@ -6,6 +6,7 @@ use App\Models\Photography;
 use App\Http\Requests\StorePhotographyRequest;
 use App\Http\Requests\UpdatePhotographyRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -26,19 +27,7 @@ class PhotographyController extends Controller
      */
     public function create()
     {
-        $categories = [
-            'Landscape',
-            'Portrait',
-            'Wildlife',
-            'Street',
-            'Architectural',
-            'Fashion',
-            'Sports',
-            'Macro',
-            'Travel',
-            'Documentary'
-        ];
-        return view('admin.photo.create', compact('categories'));
+        return view('admin.photo.create', ['categories' => Category::all()]);
     }
 
     /**
@@ -74,18 +63,8 @@ class PhotographyController extends Controller
      */
     public function edit(Photography $photography)
     {
-        $categories = [
-            'Landscape',
-            'Portrait',
-            'Wildlife',
-            'Street',
-            'Architectural',
-            'Fashion',
-            'Sports',
-            'Macro',
-            'Travel',
-            'Documentary'
-        ];
+
+        $categories =  Category::all();
         return view('admin.photo.edit', compact('photography', 'categories'));
     }
 

@@ -4,7 +4,7 @@
     <div class="jumbotron bg-dark text-white p-5 d-flex align-items-center justify-content-between">
         <h1>Edit Photo {{ $photography->name }}</h1>
         <a class="btn btn-primary" href="{{ route('admin.photographys.index') }}">
-            <i class="fa-solid fa-plus"></i> Back
+            <i class="fa-solid fa-arrow-left"></i> Back
         </a>
     </div>
     <div class="container mt-2 ">
@@ -41,12 +41,12 @@
             </div>
 
             <div class="mb-3">
-                <label for="category" class="form-label">Category <i class="fa-solid fa-list"></i></label>
-                <select class="form-select form-select-lg" name="category" id="category">
+                <label for="category_id" class="form-label">Category <i class="fa-solid fa-list"></i></label>
+                <select class="form-select form-select-lg" name="category_id" id="category_id">
                     <option>Select one</option>
                     @foreach ($categories as $category)
-                        <option {{ $photography->category == $category ? 'selected' : '' }} value="{{ $category }}">
-                            {{ $category }}
+                        <option {{ $photography->category == $category ? 'selected' : '' }} value="{{ $category->id }}">
+                            {{ $category->name }}
                         </option>
                     @endforeach
                 </select>
