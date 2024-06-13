@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['photographys' => Photography::orderByDesc('id')->paginate(10)]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
