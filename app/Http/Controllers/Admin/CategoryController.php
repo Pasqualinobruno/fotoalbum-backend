@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -13,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.categories.index', ['categories' => Category::orderByDesc('id')->get()]);
     }
 
     /**
@@ -21,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -29,7 +30,16 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        //dd($request->all());
+        //validiamo i dati
+        $validated = $request->validated();
+        //dd($validated);
+
+        //creamo la categoria
+        Category::create($validated);
+
+        //pagina di ritorno dopo la creazione con messaggio
+        return to_route('admin.categories.index')->with('message', 'Category created successfully.');
     }
 
     /**

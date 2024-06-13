@@ -7,7 +7,7 @@
             <i class="fa-solid fa-arrow-left"></i> Back
         </a>
     </div>
-    <div class="container mt-2 ">
+    <div class="container mt-2">
         @include('partials.error')
 
         <form action="{{ route('admin.photographys.store') }}" method="post" enctype="multipart/form-data">

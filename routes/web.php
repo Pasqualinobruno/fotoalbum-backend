@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PhotographyController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Photography;
@@ -34,6 +35,7 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
 
         Route::resource('photographys', PhotographyController::class);
+        Route::resource('categories', CategoryController::class);
     });
 
 

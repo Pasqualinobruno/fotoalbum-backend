@@ -48,6 +48,8 @@
                             <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                             <a class="nav-link"
                                 href="{{ route('admin.photographys.index') }}">{{ __('Photographys') }}</a>
+                            <a class="nav-link"
+                                href="{{ route('admin.categories.index') }}">{{ __('Categories') }}</a>
                         </li>
                     </ul>
 
