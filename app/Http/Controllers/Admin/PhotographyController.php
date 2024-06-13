@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePhotographyRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PhotographyController extends Controller
 {
@@ -111,7 +112,7 @@ class PhotographyController extends Controller
         $photography->update($validated);
 
         //rindiriziamo
-        return to_route('admin.photographys.index')->with('message', 'Photography created successfully.');
+        return to_route('admin.photographys.index')->with('message', 'Photography update successfully.');
     }
 
 
@@ -120,6 +121,10 @@ class PhotographyController extends Controller
      */
     public function destroy(Photography $photography)
     {
-        //
+        if ($photography->image && !Str::startsWith($photography->image, 'https://')) {
+            Storage::delete($photography->image);
+        }
+        $photography->delete();
+        return to_route('admin.photographys.index')->with('message', 'Photography destroye successfully.');
     }
 }

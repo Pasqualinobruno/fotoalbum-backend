@@ -44,14 +44,15 @@
 
                             <td>{{ $photo->upload_image }}</td>
                             <td>
-                                <button class="btn btn-primary">
-                                    <a href="{{ route('admin.photographys.show', $photo) }}" class="text-white a-un"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                </button>
-                                <button class="btn btn-dark">
-                                    <a href="{{ route('admin.photographys.edit', $photo) }}" class="text-white a-un"><i
-                                            class="fa-solid fa-pencil-alt"></i></a>
-                                </button>
+
+                                <a href="{{ route('admin.photographys.show', $photo) }}"
+                                    class="text-white a-un btn btn-primary"><i class="fa-solid fa-eye"></i></a>
+
+
+                                <a href="{{ route('admin.photographys.edit', $photo) }}"
+                                    class="text-white a-un btn btn-dark"><i class="fa-solid fa-pencil-alt"></i></a>
+
+                                @include('partials.delete-modal')
                             </td>
                         </tr>
                     @empty
