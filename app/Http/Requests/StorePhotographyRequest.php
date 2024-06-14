@@ -28,7 +28,8 @@ class StorePhotographyRequest extends FormRequest
             'upload_image' => 'nullable|date',
             'evidence' => 'nullable|boolean',
             'city' => 'nullable|string|max:100',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'albums' => 'exists:albums,id'
 
         ];
     }

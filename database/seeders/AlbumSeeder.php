@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Albums;
+use App\Models\Album;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -27,7 +27,7 @@ class AlbumsSeeder extends Seeder
         ];
         foreach ($albums as $album) {
 
-            $newAlbum = new Albums();
+            $newAlbum = new Album();
             $newAlbum->name = $album;
             $newAlbum->upload_album = now();
             $newAlbum->save();

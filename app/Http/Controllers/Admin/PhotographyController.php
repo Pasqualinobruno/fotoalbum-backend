@@ -6,6 +6,7 @@ use App\Models\Photography;
 use App\Http\Requests\StorePhotographyRequest;
 use App\Http\Requests\UpdatePhotographyRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Album;
 use App\Models\Category;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,10 @@ class PhotographyController extends Controller
      */
     public function create()
     {
-        return view('admin.photo.create', ['categories' => Category::all()]);
+        $categories = Category::all();
+        $albums = Album::all();
+
+        return view('admin.photo.create', compact('categories', 'albums'));
     }
 
     /**
@@ -39,12 +43,13 @@ class PhotographyController extends Controller
         //validazione
         $validated = $request->validated();
 
-        //creazione
+
         $validated['image'] = Storage::put('uploads', $request->image);
 
         //dd($validated);
-
-        Photography::create($validated);
+        //creazione
+        $photography = Photography::create($validated);
+        $photography->albums()->attach($validated['albums']);
 
         //pagina di ritorno dopo la creazione con messaggio
         return to_route('admin.photographys.index')->with('message', 'Photography created successfully.');
@@ -65,7 +70,9 @@ class PhotographyController extends Controller
     {
 
         $categories =  Category::all();
-        return view('admin.photo.edit', compact('photography', 'categories'));
+        $albums =  Album::all();
+
+        return view('admin.photo.edit', compact('photography', 'categories', 'albums'));
     }
 
     /**
@@ -90,6 +97,10 @@ class PhotographyController extends Controller
         //aggiorniamo
         $photography->update($validated);
 
+        if ($request->has('albums')) {
+            $photography->albums()->sync($validated['albums']);
+        }
+
         //rindiriziamo
         return to_route('admin.photographys.index')->with('message', 'Photography update successfully.');
     }
@@ -100,9 +111,11 @@ class PhotographyController extends Controller
      */
     public function destroy(Photography $photography)
     {
+        //controlla l'immagine e la elimina
         if ($photography->image && !Str::startsWith($photography->image, 'https://')) {
             Storage::delete($photography->image);
         }
+        //cancella la nostra foto 
         $photography->delete();
         return to_route('admin.photographys.index')->with('message', 'Photography destroye successfully.');
     }

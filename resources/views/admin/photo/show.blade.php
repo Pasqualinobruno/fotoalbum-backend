@@ -16,10 +16,32 @@
                 <img height="500" width="400" loading='lazy' src="{{ asset('storage/' . $photography->image) }}"
                     alt="">
             @endif
+
+
+
+
+
+
+
+
+
+
+
             <ul class="list-unstyled">
                 <li><strong>Description:</strong> {{ $photography->description }}</li>
                 <hr>
-                <li><strong>Category:</strong> {{ $photography->category ? $photography->category->name : 'Uncategorize' }}
+                <li><strong>Category:</strong> <span class="badge bg-primary">
+                        {{ $photography->category ? $photography->category->name : 'Uncategorize' }} </span>
+                </li>
+                <li>
+                    <div class="albums">
+                        <strong>Albums:</strong>
+                        @forelse ($photography->albums as $album)
+                            <span class="badge bg-dark"> {{ $album->name }}</span>
+                        @empty
+                            <span class="badge bg-dark">No Album</span>
+                        @endforelse
+                    </div>
                 </li>
                 <li><strong>Upload:</strong> {{ $photography->upload_image }}</li>
 

@@ -54,6 +54,21 @@
                     @enderror
                 </select>
             </div>
+
+            <div>
+                <label for="albums_id" class="form-label">Albums select <i class="fa-solid fa-book-open"></i></label>
+                <div class="mb-3 d-flex gap-3">
+                    @foreach ($albums as $album)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ $album->id }}"
+                                id="album-{{ $album->id }}" name="albums[]"
+                                {{ in_array($album->id, old('albums', [])) ? 'checked' : '' }} />
+                            <label class="form-check-label" for="albums"> {{ $album->name }} </label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
             <div class="mb-3">
                 <label for="upload_image" class="form-label">Upload Date <i class="fa-regular fa-calendar"></i></label>
                 <input type="date" class="form-control" name="upload_image" id="upload_image"
