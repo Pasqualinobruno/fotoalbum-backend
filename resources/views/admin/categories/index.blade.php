@@ -11,7 +11,7 @@
 
 
     </header>
-    <div class="container">
+    <div class="container m-auto">
         @include('partials.session-message')
         <div class="table-responsive">
             <table class="table table-striped table-hover table-borderless table-dark align-middle">
@@ -33,8 +33,12 @@
                         <tr class="table-primary">
                             <td scope="row">{{ $category->id }}</td>
                             <td>{{ $category->name }}</td>
-                            <td>Edit/Delete</td>
+                            <td>
+                                <a href="{{ route('admin.categories.edit', $category) }}"
+                                    class="text-white a-un btn btn-dark"><i class="fa-solid fa-pencil-alt"></i></a>
+                                @include('partials.delete-modal-category')
                             </td>
+
                         </tr>
                     @empty
                         <tr class="table-primary">
@@ -51,3 +55,10 @@
 
     </div>
 @endsection
+<style>
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>

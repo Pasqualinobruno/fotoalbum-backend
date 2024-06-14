@@ -55,7 +55,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -63,7 +64,17 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        //dd($request->all());
+
+        //validazione
+        $validated = $request->validated();
+        //dd($request->all($validated));
+
+        //aggiorniamo i dati
+        $category->update($validated);
+
+        //ritorniamo alla rotta index con un messaggio
+        return to_route('admin.categories.index')->with('message', 'Category update successfully.');
     }
 
     /**
@@ -71,6 +82,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return to_route('admin.categories.index')->with('message', 'Category destroye successfully.');
     }
 }

@@ -85,7 +85,7 @@ class PhotographyController extends Controller
             $image_path = Storage::put('upload', $request->image);
             $validated['image'] = $image_path;
         }
-        //dd($request->all());
+        //dd($request->all($validated));
 
         //aggiorniamo
         $photography->update($validated);
