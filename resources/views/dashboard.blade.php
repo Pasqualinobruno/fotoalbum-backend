@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             @foreach ($photographys as $photo)
                 <div class="col-md-3 mb-4">
-                    <div class="card">
+                    <div class="card shadow mb-4 border-custom">
                         @if (Str::startsWith($photo->image, 'https://'))
                             <img class="card-img-top" loading='lazy' src="{{ $photo->image }}" alt="">
                         @else

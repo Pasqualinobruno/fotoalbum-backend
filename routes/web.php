@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PhotographyController;
+use App\Http\Controllers\Admin\AlbumsController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Photography;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'verified'])
 
         Route::resource('photographys', PhotographyController::class);
         Route::resource('categories', CategoryController::class);
+        Route::resource('albums', AlbumsController::class);
     });
 
 

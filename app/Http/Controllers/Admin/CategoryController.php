@@ -30,7 +30,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //dd($request->all());
+        dd($request->all());
         //validiamo i dati
         $validated = $request->validated();
         //dd($validated);

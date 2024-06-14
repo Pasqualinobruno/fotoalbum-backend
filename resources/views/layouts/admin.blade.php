@@ -50,6 +50,7 @@
                                 href="{{ route('admin.photographys.index') }}">{{ __('Photographys') }}</a>
                             <a class="nav-link"
                                 href="{{ route('admin.categories.index') }}">{{ __('Categories') }}</a>
+                            <a class="nav-link" href="{{ route('admin.albums.index') }}">{{ __('Albums') }}</a>
                         </li>
                     </ul>
 
@@ -96,7 +97,7 @@
             @yield('content')
         </main>
 
-        @include('partials.footer')
+
     </div>
 </body>
 

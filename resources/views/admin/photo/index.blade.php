@@ -60,16 +60,6 @@
                             <td scope="row">No photo</td>
                         </tr>
                     @endforelse
-
-
-
-
-
-
-
-
-
-
                 </tbody>
                 <tfoot>
 

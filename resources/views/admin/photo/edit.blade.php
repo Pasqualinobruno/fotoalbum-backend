@@ -45,7 +45,8 @@
                 <select class="form-select form-select-lg" name="category_id" id="category_id">
                     <option>Select one</option>
                     @foreach ($categories as $category)
-                        <option {{ $photography->category == $category ? 'selected' : '' }} value="{{ $category->id }}">
+                        <option value="{{ $category->id }}"
+                            {{ old('category_id', $photography->category_id ?? '') == $category->id ? 'selected' : '' }}>
                             {{ $category->name }}
                         </option>
                     @endforeach

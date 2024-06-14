@@ -18,15 +18,6 @@
             @endif
 
 
-
-
-
-
-
-
-
-
-
             <ul class="list-unstyled">
                 <li><strong>Description:</strong> {{ $photography->description }}</li>
                 <hr>
