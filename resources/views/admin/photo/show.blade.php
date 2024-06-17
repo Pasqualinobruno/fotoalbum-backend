@@ -2,11 +2,16 @@
 @section('content')
     <div class="jumbotron bg-dark text-white p-5 d-flex align-items-center justify-content-between">
         <h1>Photographys {{ $photography->name }}</h1>
-        <a class="btn btn-primary" href="{{ route('admin.photographys.index') }}">
-            <i class="fa-solid fa-arrow-left"></i> Back
-        </a>
+        <div>
+            <a class="btn btn-primary" href="{{ route('admin.photographys.index') }}">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </a>
+            <a class="btn btn-primary" href="{{ route('admin.photographys.edit', $photography) }}">
+                <i class="fa-solid fa-pencil-alt"></i> Edit
+            </a>
+        </div>
     </div>
-    <div class="container p-3">
+    <div class="container p-3 mb-2">
 
         <h2 class="text-center">{{ $photography->name }}</h2>
         <div class="container d-flex gap-4">
@@ -19,7 +24,7 @@
 
 
             <ul class="list-unstyled">
-                <li><strong>Description:</strong> {{ $photography->description }}</li>
+                <li><strong>Description:</strong> {{ $photography->description ?: 'No description' }}</li>
                 <hr>
                 <li><strong>Category:</strong> <span class="badge bg-primary">
                         {{ $photography->category ? $photography->category->name : 'Uncategorize' }} </span>
@@ -36,7 +41,7 @@
                 </li>
                 <li><strong>Upload:</strong> {{ $photography->upload_image }}</li>
 
-                <li><strong>City:</strong> {{ $photography->city }}</li>
+                <li><strong>City:</strong> {{ $photography->city ?: 'No city' }}</li>
 
                 <li><strong>In evidence:</strong> {{ $photography->evidence == 0 ? 'Sì' : 'No' }}</li>
             </ul>
