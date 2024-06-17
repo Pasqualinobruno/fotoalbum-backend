@@ -6,31 +6,42 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Photography;
 
-
 class PhotoController extends Controller
 {
-
     public function index(Request $request)
     {
+        // Query base per recuperare le fotografie con le relazioni category e albums
         $query = Photography::with(['category', 'albums'])->orderByDesc('id');
 
+        // Filtro per inEvidence
         if ($request->has('inEvidence') && $request->inEvidence === 'true') {
             $query->where('evidence', 1);
         }
 
+        // Filtro per la ricerca
         if ($request->has('search')) {
             $query->where('name', 'LIKE', '%' . $request->search . '%');
         }
 
+        // Filtro per la categoria
+        if ($request->has('category')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('id', $request->category);
+            });
+        }
+
+        // Restituzione dei risultati con paginazione
         return response()->json([
+            'success' => true,
             'results' => $query->paginate(5)
         ]);
     }
 
-
     public function show($id)
     {
-        $photo = Photography::with(['category', 'albums'])->where('id', $id)->first();
+        // Recupero della singola fotografia con le relazioni category e albums
+        $photo = Photography::with(['category', 'albums'])->find($id);
+
         if ($photo) {
             return response()->json([
                 'success' => true,
@@ -39,8 +50,8 @@ class PhotoController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'results' => "404 Not Found"
-            ]);
+                'message' => "Fotografia non trovata",
+            ], 404);
         }
     }
 }

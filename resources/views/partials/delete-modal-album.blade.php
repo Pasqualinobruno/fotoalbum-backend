@@ -1,6 +1,5 @@
 <!-- Modal trigger button -->
-<button type="button" class="btn btn-danger " style="padding: 13.5px" data-bs-toggle="modal"
-    data-bs-target="#modal-{{ $album->id }}">
+<button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#modal-{{ $album->id }}">
     <i class="fas fa-trash fa-sm fa-fw"></i>
 </button>
 <!-- Modal Body -->
