@@ -25,9 +25,7 @@ class PhotoController extends Controller
 
         // Filtro per la categoria
         if ($request->has('category')) {
-            $query->whereHas('category', function ($q) use ($request) {
-                $q->where('id', $request->category);
-            });
+            $query->where('category_id', $request->category);
         }
 
         // Restituzione dei risultati con paginazione
