@@ -9,12 +9,24 @@ use App\Models\Photography;
 
 class PhotoController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
+        $query = Photography::with(['category', 'albums'])->orderByDesc('id');
+
+        if ($request->has('inEvidence') && $request->inEvidence === 'true') {
+            $query->where('evidence', 1);
+        }
+
+        if ($request->has('search')) {
+            $query->where('name', 'LIKE', '%' . $request->search . '%');
+        }
+
         return response()->json([
-            'results' => Photography::with(['category', 'albums'])->orderByDesc('id')->paginate(),
+            'results' => $query->paginate(5)
         ]);
     }
+
 
     public function show($id)
     {

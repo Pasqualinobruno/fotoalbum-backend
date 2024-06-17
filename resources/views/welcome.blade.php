@@ -17,7 +17,7 @@
                         captures a unique story and moment in time. Explore my gallery to see the
                         world through my lens.
                     </p>
-                    <a href="" class="btn btn-primary btn-lg" type="button">Go my site</a>
+                    <a href="http://localhost:5174/" class="btn btn-primary btn-lg" type="button">Go my site</a>
                 </div>
             </div>
         </div>

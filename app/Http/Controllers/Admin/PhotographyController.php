@@ -49,7 +49,11 @@ class PhotographyController extends Controller
         //dd($validated);
         //creazione
         $photography = Photography::create($validated);
-        $photography->albums()->attach($validated['albums']);
+        //questo mi controlla se contine la chiave albums 
+        if (isset($validated['albums'])) {
+            $photography->albums()->attach($validated['albums']);
+        }
+
 
         //pagina di ritorno dopo la creazione con messaggio
         return to_route('admin.photographys.index')->with('message', 'Photography created successfully.');
